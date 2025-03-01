@@ -1,0 +1,26 @@
+{
+  "$schema": "https://dl.viam.dev/module.schema.json",
+  "module_id": "erh:viamwifislam",
+  "visibility": "private",
+  "url": "",
+  "description": "Modular slam service: unifi",
+  "models": [
+    {
+      "api": "rdk:service:slam",
+      "model": "erh:viamwifislam:unifi",
+      "short_description": "Provide a short (100 characters or less) description of this model here",
+      "markdown_link": "README.md#model-erhviamwifislamunifi"
+    }
+  ],
+  "entrypoint": "bin/viamwifislam",
+  "first_run": "",
+  "build": {
+    "build": "make module.tar.gz",
+    "setup": "make setup",
+    "path": "bin/module.tar.gz",
+    "arch": [
+      "linux/amd64",
+      "linux/arm64"
+    ]
+  }
+}
