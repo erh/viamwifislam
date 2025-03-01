@@ -2,6 +2,9 @@ package main
 
 import (
 	"context"
+	"flag"
+	"fmt"
+
 	"go.viam.com/rdk/logging"
 	"go.viam.com/rdk/resource"
 	"go.viam.com/rdk/services/slam"
@@ -19,6 +22,12 @@ func realMain() error {
 	ctx := context.Background()
 	logger := logging.NewLogger("cli")
 
+	ssid := ""
+
+	flag.StringVar(&ssid, "ssid", ssid, "what ssid to scan for")
+
+	flag.Parse()
+
 	deps := resource.Dependencies{}
 	// can load these from a remote moachine if you need
 
@@ -30,9 +39,13 @@ func realMain() error {
 	}
 	defer thing.Close(ctx)
 
-	_, err = viamwifislam.DoScan(ctx)
+	res, err := viamwifislam.DoScan(ctx, ssid)
 	if err != nil {
 		return err
+	}
+
+	for _, r := range res {
+		fmt.Printf("%v\n", r)
 	}
 
 	return nil
